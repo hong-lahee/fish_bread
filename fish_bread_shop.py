@@ -6,10 +6,16 @@ stock = {
     "초코붕어빵" : 7
 } 
 # 붕어빵 판 갯수
-salse = {
+sales = {
     "팥붕어빵" : 0,
     "슈크림붕어빵" : 0,
     "초코붕어빵" : 0
+}
+# 붕어빵 가격
+price ={
+    '팥붕어빵' : 500,
+    '슈크림붕어빵' : 700,
+    '초코붕어빵' : 800
 }
 # 비밀번호
 pw = 'ghdfkgml'
@@ -24,7 +30,7 @@ def order_bread():
             bread_count = int(input('구매할 갯수를 입력하세요'))
             if  stock[bread_type] >= bread_count:
                 stock[bread_type] -= bread_count
-                salse[bread_type] += bread_count
+                sales[bread_type] += bread_count
                 print(f'{bread_type}를 {bread_count}개 구매하셨습니다')
             else:
                 print(f'재고가 부족합니다 현재 {stock[bread_type]}개만 주문 가능합니다')
@@ -48,6 +54,10 @@ def admin_mode():
         else:
             print('잘못입력하셨습니다')
 
+# 붕어빵 가격 측정 함수
+def purchase_sales():
+    total_salse = sum(sales[key] * price[key] for key in sales)
+    print(f'오늘의 총 매출은 {total_salse}원 입니다')
 
 
 while True:
