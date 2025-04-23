@@ -1,17 +1,17 @@
 #   조건, 관리자, 종료 이 3가지 선택을 통해서 각각 기능이 작동되도록 만들겁니다
-
+# 붕어빵 남은 수량
 stock = {
     "팥붕어빵" : 10,
     "슈크림붕어빵" : 8,
     "초코붕어빵" : 7
 } 
-
+# 붕어빵 판 갯수
 salse = {
     "팥붕어빵" : 0,
     "슈크림붕어빵" : 0,
     "초코붕어빵" : 0
 }
-
+# 붕어빵 주문 모드
 def order_bread():
     while True:
         bread_type = input('주문할 붕어빵맛을 입력해주세요(팥붕어빵, 슈크림붕어빵, 초코붕어빵) 만약 뒤로가길 원하시면 뒤로가기를 입력하세요')
@@ -26,6 +26,19 @@ def order_bread():
                 print(f'{bread_type}를 {bread_count}개 구매하셨습니다')
             else:
                 print(f'재고가 부족합니다 현재 {stock[bread_type]}개만 주문 가능합니다')
+        else:
+            print('잘못입력하셨습니다')
+# 붕어빵 관리자 모드
+def admin_mode():
+    while True:
+        bread_type = (input('추가 할 붕어빵의 맛을 입력하세요(팥붕어빵, 슈크림붕어빵, 초코붕어빵) 뒤로가고 싶다면 뒤로가기를 입력하세요'))
+        if bread_type == "뒤로가기":
+            print('뒤로 돌아갑니다')
+            break
+        if bread_type in stock:
+            bread_count = int(input('추가할 수량을 입력하세요'))
+            stock[bread_type] += bread_count
+            print(f'{bread_type}의 재고가 {bread_count}개 추가 되어 현재 {bread_type}의 재고는 {stock[bread_type]}개 입니다.')
         else:
             print('잘못입력하셨습니다')
 
