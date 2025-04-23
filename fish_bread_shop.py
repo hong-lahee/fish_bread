@@ -11,6 +11,8 @@ salse = {
     "슈크림붕어빵" : 0,
     "초코붕어빵" : 0
 }
+# 비밀번호
+pw = 'ghdfkgml'
 # 붕어빵 주문 모드
 def order_bread():
     while True:
@@ -30,6 +32,10 @@ def order_bread():
             print('잘못입력하셨습니다')
 # 붕어빵 관리자 모드
 def admin_mode():
+    pwd = input('비밀번호를 입력하세요')
+    if pwd not in pw:
+        print('비밀번호를 다시 입력해주세요')
+        return admin_mode()
     while True:
         bread_type = (input('추가 할 붕어빵의 맛을 입력하세요(팥붕어빵, 슈크림붕어빵, 초코붕어빵) 뒤로가고 싶다면 뒤로가기를 입력하세요'))
         if bread_type == "뒤로가기":
