@@ -1,73 +1,16 @@
-#   조건, 관리자, 종료 이 3가지 선택을 통해서 각각 기능이 작동되도록 만들겁니다
-# 붕어빵 남은 수량
-stock = {
-    "팥붕어빵" : 10,
-    "슈크림붕어빵" : 8,
-    "초코붕어빵" : 7
-} 
-# 붕어빵 판 갯수
-sales = {
-    "팥붕어빵" : 0,
-    "슈크림붕어빵" : 0,
-    "초코붕어빵" : 0
-}
-# 붕어빵 가격
-price ={
-    '팥붕어빵' : 500,
-    '슈크림붕어빵' : 700,
-    '초코붕어빵' : 800
-}
-# 비밀번호
-pw = 'ghdfkgml'
-# 붕어빵 주문 모드
-def order_bread():
-    while True:
-        bread_type = input('주문할 붕어빵맛을 입력해주세요(팥붕어빵, 슈크림붕어빵, 초코붕어빵) 만약 뒤로가길 원하시면 뒤로가기를 입력하세요')
-        if bread_type == "뒤로가기":
-            print('뒤로 돌아갑니다')
-            break 
-        if bread_type in stock:
-            bread_count = int(input('구매할 갯수를 입력하세요'))
-            if  stock[bread_type] >= bread_count:
-                stock[bread_type] -= bread_count
-                sales[bread_type] += bread_count
-                print(f'{bread_type}를 {bread_count}개 구매하셨습니다')
-            else:
-                print(f'재고가 부족합니다 현재 {stock[bread_type]}개만 주문 가능합니다')
-        else:
-            print('잘못입력하셨습니다')
-# 붕어빵 관리자 모드
-def admin_mode():
-    pwd = input('비밀번호를 입력하세요')
-    if pwd not in pw:
-        print('비밀번호를 다시 입력해주세요')
-        return admin_mode()
-    while True:
-        bread_type = (input('추가 할 붕어빵의 맛을 입력하세요(팥붕어빵, 슈크림붕어빵, 초코붕어빵) 뒤로가고 싶다면 뒤로가기를 입력하세요'))
-        if bread_type == "뒤로가기":
-            print('뒤로 돌아갑니다')
-            break
-        if bread_type in stock:
-            bread_count = int(input('추가할 수량을 입력하세요'))
-            stock[bread_type] += bread_count
-            print(f'{bread_type}의 재고가 {bread_count}개 추가 되어 현재 {bread_type}의 재고는 {stock[bread_type]}개 입니다.')
-        else:
-            print('잘못입력하셨습니다')
+from fishbread_model import Bread_Shop
 
-# 붕어빵 가격 측정 함수
-def purchase_sales():
-    total_salse = sum(sales[key] * price[key] for key in sales)
-    print(f'오늘의 총 매출은 {total_salse}원 입니다')
-
+shop = Bread_Shop()
 
 while True:
     mode = input("원하는 모드를 선택하세요(주문, 관리자, 종료):")
     if mode == "종료":
+        shop.purchase_sales()
         print('시스템이 종료되었습니다')
         break
     elif mode == "주문":
-        order_bread()
+        shop.order_bread()
     elif mode == "관리자":
-        admin_mode()
+        shop.admin_mode()
     else:
         print('잘못 입력 하셨습니다')
